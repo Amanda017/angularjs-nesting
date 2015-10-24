@@ -11,8 +11,12 @@
 </head>
 
 <body ng-app="child1app">
-<div class="content">
+<div class="content" ng-controller="HomeCtrl as home">
     <h1>{{home.message}}</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="#/view1">View1</a></li>
+        <li><a href="#/view2">View2</a></li>
+    </ul>
     <div ng-view></div>
 </div>
 </body>
