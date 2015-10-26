@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+</head>
+
+<body ng-app="iframeApp">
+<div class="content container" ng-controller="HomeCtrl as home">
+    <h2>{{home.message}}</h2>
+    <div class="row">
+        <div class="col col-lg-8">
+            <ul class="nav nav-tabs">
+                <li><a href="" ng-click="home.changeChild('child1')">Child 1</a></li>
+                <li><a href="" ng-click="home.changeChild('child2')">Child 2</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-3">
+            <div class="input-group input-group-sm">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Message for child Iframes..."
+                       ng-model="home.currentMessage">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="home.sendMessage()">Send!</button>
+              </span>
+            </div>
+
+        </div>
+    </div>
+
+    <iframe ng-show="!home.loading && home.currentChild"
+            id="myIframe"
+            width="100%"
+            height="300"
+            ng-src="{{home.currentChild}}"></iframe>
+    <div ng-show="home.loading">
+        <p class="text-center">Loading....</p>
+    </div>
+</div>
+</body>
+
+</html>

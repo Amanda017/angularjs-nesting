@@ -1,4 +1,3 @@
-// Code goes here
 angular.module('app', ['ngRoute','app.core', 'app.user', 'app.settings'])
     .config(function($routeProvider) {
         $routeProvider.when('/home', {

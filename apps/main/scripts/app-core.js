@@ -1,6 +1,3 @@
-/**
- * Created by enrico.costanzi on 23/10/2015.
- */
 angular.module('app.core', [])
     .provider('Menu', function() {
     var _menu = [];

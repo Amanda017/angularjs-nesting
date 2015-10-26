@@ -15,8 +15,27 @@ angular.module('child1app', ['ngRoute'])
             });
 
     })
-    .controller('HomeCtrl', function(config) {
-        this.message = "Hello I'm " + config.appName + "!!!";
+    .controller('HomeCtrl', function(config, $scope, $window) {
+        var self = this;
+
+        this.receivedMessages = [];
+        this.message = config.appName;
+
+        //receiving postmessage
+        $window.addEventListener('message', function(event){
+            console.log(config.appName + ": received message " + event.data);
+            if(event.origin !== 'http://localhost:3000') return;
+
+            if(event.data !== 'ping'){
+                $scope.$applyAsync(function(){
+                    self.receivedMessages.push(event.data);
+                });
+                event.source.postMessage('Roger!', event.origin);
+            } else {
+                event.source.postMessage('pong', event.origin);
+            }
+
+        })
     })
     .controller('View1Ctrl', function(config){
         this.message = "Hello! I'm view 1 of " + config.appName + "!"
